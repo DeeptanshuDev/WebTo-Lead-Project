@@ -1,12 +1,19 @@
-function beforeSubmit() {
-  let outputdate = document.querySelector(".outputdate");
-  let inputdate = document.querySelector(".inputdate");
-  console.log("inputdate: ,", inputdate.value);
-  //inputdate is of string type so we need to formate it from string to date
+let captchechecked = false;
 
-  let formattedDate = new Date(inputdate.value).toLocaleDateString("en-IN");
-  outputdate.value = formattedDate;
-  console.log("outputdate: ,", outputdate.value);
+function beforeSubmit(event) {
+  if (captchechecked) {
+    let outputdate = document.querySelector(".outputdate");
+    let inputdate = document.querySelector(".inputdate");
+    console.log("inputdate: ,", inputdate.value);
+    //inputdate is of string type so we need to formate it from string to date
+
+    let formattedDate = new Date(inputdate.value).toLocaleDateString("en-IN");
+    outputdate.value = formattedDate;
+    console.log("outputdate: ,", outputdate.value);
+  } else {
+    alert("Please check the reCaptca box");
+    event.preventDefault();
+  }
 }
 
 function timestamp() {
@@ -21,3 +28,7 @@ function timestamp() {
   }
 }
 setInterval(timestamp, 500);
+
+function captchesuccess() {
+  captchechecked = true;
+}
